@@ -8,6 +8,9 @@ The goal of this project is to build a web application for a car rental company.
 ## What's already done
 
 - Database models
+
+![alt text](/../screenshots/imgs/Banco-de-dados.png?raw=true "Database models")
+
 - Website draft
 
 ![alt text](/../screenshots/imgs/Screenshot_20190303_192736.png?raw=true "Website draft")
@@ -16,3 +19,4 @@ The goal of this project is to build a web application for a car rental company.
 
 - Set up the routes
 - Build the interface
+- Improve the database models
