@@ -2,6 +2,10 @@ from django.db import models
 from django.utils import timezone
 
 # Create your models here.
+class Categoria(models.Model):
+    categoriaID = models.AutoField(primary_key = True)
+    nome = models.CharField(max_length = 20)
+
 class Marca(models.Model):
     marcaID = models.AutoField(primary_key = True)
     nome = models.CharField(max_length = 30)
@@ -9,7 +13,8 @@ class Marca(models.Model):
 
 class Carro(models.Model):
     carID = models.AutoField(primary_key = True)
-    marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
+    marca = models.ForeignKey(Marca, on_delete = models.CASCADE)
+    categoria = models.ForeignKey(Categoria, on_delete = models.CASCADE)
     modelo = models.CharField(max_length = 50)
     ano = models.DateTimeField()
     descricao = models.CharField(max_length = 200)
