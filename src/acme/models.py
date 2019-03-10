@@ -13,8 +13,8 @@ class Marca(models.Model):
 
 class Carro(models.Model):
     carID = models.AutoField(primary_key = True)
-    marca = models.ForeignKey(Marca, on_delete = models.CASCADE)
-    categoria = models.ForeignKey(Categoria, on_delete = models.CASCADE)
+    marca = models.ForeignKey('Marca', on_delete = models.CASCADE)
+    categoria = models.ForeignKey('Categoria', on_delete = models.CASCADE)
     modelo = models.CharField(max_length = 50)
     ano = models.DateTimeField()
     descricao = models.CharField(max_length = 200)
@@ -28,14 +28,14 @@ class Pessoa(models.Model):
 
 class Publicacao(models.Model):
     publicacaoID = models.AutoField(primary_key = True)
-    carro = models.ForeignKey(Carro, on_delete = models.CASCADE)
+    carro = models.ForeignKey('Carro', on_delete = models.CASCADE)
     preco = models.FloatField()
     disponivel = models.IntegerField()
     descricao = models.CharField(max_length = 200)
 
 class Aluguel(models.Model):
     aluguelID = models.AutoField(primary_key = True)
-    pessoa = models.ForeignKey(Pessoa, on_delete = models.CASCADE)
-    publicacao = models.ForeignKey(Publicacao, on_delete = models.CASCADE)
+    pessoa = models.ForeignKey('Pessoa', on_delete = models.CASCADE)
+    publicacao = models.ForeignKey('Publicacao', on_delete = models.CASCADE)
     data_retirada = models.DateTimeField()
     data_retorno = models.DateTimeField()
