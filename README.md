@@ -1,8 +1,8 @@
-# Pi-ACME
+# Pi-BCME
 
 ## About
 
-PI-ACME is the fourth semester's interdisciplinary project of the Analysis and Systems Development from Fatec-Indaiatuba.
+PI-BCME is the fourth semester's interdisciplinary project of the Analysis and Systems Development from Fatec-Indaiatuba.
 The goal of this project is to build a web application for a car rental company.
 
 ## What's already done
