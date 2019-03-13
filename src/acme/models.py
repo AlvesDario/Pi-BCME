@@ -24,6 +24,12 @@ class Carro(models.Model):
 class Pessoa(models.Model):
     pessoaID = models.AutoField(primary_key = True)
     nome = models.CharField(max_length=50)
+    email = models.CharField(max_length=50)
+    telefone = models.CharField(max_length=11)
+    endereco = models.CharField(max_length=50)
+    rua = models.CharField(max_length=40)
+    cep = models.CharField(max_length=8)
+    CNH = models.CharField(max_length=11)
 
 
 class Publicacao(models.Model):

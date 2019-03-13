@@ -1,17 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from .models import Carro
 # Create your views here.
 # httpresponse should be given as parameters the path to the html file of the page
 
 def index(request):
-    return HttpResponse('home page')
+    return render(request, 'acme/index.html')
 
 def login(request):
-    return HttpResponse('login')
+    return render(request, 'acme/login.html')
 
-def signin(request):
-    return HttpResponse('signin')
+def signup(request):
+    return HttpResponse('signup')
 
 def cars(request):
     return HttpResponse('cars')
@@ -25,4 +25,6 @@ def about(request):
 def account(request):
     return HttpResponse('account')
 
-# def (request):
+def get_cars(request):
+    carros = Carro.objects.all()
+    return render(request, 'acme/carros.html', {'cars': carros})
