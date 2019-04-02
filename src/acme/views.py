@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Carro
+from django.contrib.auth.forms import UserCreationForm
+
 # Create your views here.
 # httpresponse should be given as parameters the path to the html file of the page
 
@@ -11,7 +13,8 @@ def login(request):
     return render(request, 'acme/login.html')
 
 def signup(request):
-    return HttpResponse('signup')
+    form = UserCreationForm()
+    return render(request, 'acme/signup.html', { 'form': form })
 
 def cars(request):
     return HttpResponse('cars')

@@ -13,10 +13,10 @@
     <h1>Carros:</h1>
     {% for car in cars %}
     <div>
-        <p>Marca: {{car.marca.nome}}</p>
-        <p>{{car.marca.descricao}}</p>
+        <p>Marca: {{ car.marca.nome }}</p>
+        <p>{{ car.marca.descricao }}</p>
         <h1><a>{{ car.modelo }}</a></h1>
-        <p>Descrição: {{car.descricao}}</p>
+        <p>Descrição: {{ car.descricao }}</p>
         <p>{{ car.ano }}</p>
     </div>
     {% endfor %}
