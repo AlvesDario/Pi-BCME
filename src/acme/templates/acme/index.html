@@ -1,1 +1,223 @@
 {% extends "acme/base.html" %}
+<!DOCTYPE html><html>
+<head>
+   <!-- Compiled and minified CSS -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+   <script
+src="https://code.jquery.com/jquery-1.12.4.min.js"
+integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+crossorigin="anonymous"></script>
+
+   <!-- Compiled and minified JavaScript -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+</head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../static/acme/css/main.css">
+  <title>Hello</title>
+</head>
+<body>
+<!--Navbar Responsive-->
+<div class="navbar-fixed">
+  <nav class="green">
+    <div class="container">
+      <div class="nav-wrapper">
+          <img class="brand-logo"   src="../../static/imgs/logo/travel.png">
+        <a href="" data-target="mobile-nav" class="sidenav-trigger">
+          <i class="material-icons">menu</i>
+        </a>
+        <ul class="right hide-on-med-and-down">
+          <li>
+            <a href="#home">Home</a>            
+          </li>
+          <li>
+              <a href="#cars">Carros</a>
+          </li>
+          <li>
+            <a href="#offers">Ofertas</a>
+          </li>
+          <li>
+            <a href="#aboutus">Sobre</a>
+          </li>          
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+<!--Mobile navbar left-->
+<ul class="sidenav" id="mobile-nav">
+    <li>
+      <a href="#home">Home</a>            
+    </li>
+    <li>
+        <a href="#cars">Carros</a>
+    </li>
+    <li>
+      <a href="#offers">Ofertas</a>
+    </li>
+    <li>
+      <a href="#aboutus">Sobre</a>
+    </li>    
+  </ul>
+<!--Form-->
+<section id="search" class="section teal darken-1 grey-text ">
+  <div class="container">
+      <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">perm_contact_calendar</i>
+                <input type="text" class="datepicker">
+                <label for="icon_telephone">Data</label>
+              </div>
+              <div class="input-field col s6">
+                <i class="material-icons prefix">access_time</i>
+                <input type="text" class="timepicker">
+                <label for="icon_telephone">Horário</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s6">
+                  <i class="material-icons prefix">local_taxi</i>
+                  <input type="text" class="autocomplete"id="text-input">
+                  <label for="icon_prefix2">Localização</label>
+                </div>
+                <div class="input-field col s6">
+                  <form action="#">
+                    <p class="range-field">
+                  <input type="range" id="test5" min="0" max="10"/>
+                </p>
+              </form>
+            </div>
+          </div>
+        </form>
+      </div>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Enviar
+      <i class="material-icons left">send</i>
+    </button>
+  </div>
+</section>
+<!--Text-->
+<div class="container">
+<h4 style="text-align:justify">O que está esperando? Alugue seu carro agora mesmo! Confira abaixo as situações que se enquadram ao seu perfil.</h4>
+<p style="text-align:justify">    
+    Viagem: caso esteja passando as férias em outra cidade, tenha ido visitar um amigo fora ou mesmo viajado a trabalho, pode alugar um carro para não depender de um transporte público que não conhece e dos tradicionais táxis. 
+    Poderá assim se deslocar livremente, cumprindo seus próprios horários e você também pode alugar um automóvel para ir a uma festa ou a um evento mais distante, que custaria muito para ir e voltar de táxi e demoraria demais para contar com o transporte público.
+    <br><br>
+    Lazer: que tal alugar um veículo no final de semana para passar o dia no parque, fazendo um belo piquenique? Se mora perto da praia, está aí uma ótima solução para aproveitar o sol sem preocupação a respeito de horário para voltar. Abriu um restaurante famoso na cidade vizinha que você quer conhecer? Alugue um carro!
+    <br><br>
+    Preferência: em algumas ocasiões, você pode preferir não usar seu próprio veículo — por estar sem seguro, por exemplo. Nesses casos, pode optar por, em vez de pagar um táxi ou recorrer ao ônibus, alugar um carro para se deslocar.
+    <br><br>
+    Falta: você pode simplesmente não ter um carro próprio — seja porque não está em condições de comprar um, porque não quer arcar com a responsabilidade ou porque não compensa. Também nessa situação, a locação pode sair bem mais em conta que recorrer a táxis.
+    <br><br>
+    Teste: se você estiver interessado em comprar um determinado carro, pode alugá-lo por alguns dias, experimentando suas funcionalidades para ter certeza de que aquele é mesmo (ou não) o modelo ideal para suas demandas.
+</p>
+</div>
+<!--Slide-Carousel-->
+<section class="slider">
+  <ul class="slides">
+      <li>
+        <img src="../../static/imgs/slide-2.jpg"> <!-- random image -->
+          <div class="caption left-align">
+          <h3>Bons preços</h3>
+          <h5 class="light grey-text text-lighten-3">Ofereçemos o melhor preço do mercado.</h5>
+        </div>
+        </li>
+        <li>
+        <img src="../../static/imgs/slide-3.jpg"> <!-- random image -->
+          <div class="caption right-align">
+            <h3>Pronto para viajar</h3>
+            <h5 class="light grey-text text-lighten-3">Deixamos tudo preparado para sua viagem!</h5>
+          </div>
+        </li>
+        <li>
+        <img src="../../static/imgs/slide-4.jpg"> <!-- random image -->
+          <div class="caption center-align">
+          <h3>Facilidade no seu negócio</h3>
+          <h5 class="light grey-text text-lighten-3">Temos frotas de veículos a disposição de sua empresa.</h5>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<section class="section section-icons grey lighten-4 center">
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m4">
+        <div class="card-panel">
+          <i class="material-icons large teal-text">room</i>
+          <h4>Estamos próximos!</h4>
+          <p>Nossa equipe vai até você se precisar. Basta apenas estar em alguns locais cadastrados no catalogo.</p>
+        </div>
+      </div>
+      <div class="col s12 m4">
+          <div class="card-panel">
+            <i class="material-icons large teal-text">card_travel
+              </i>
+            <h4>Mobilidade na viagem!</h4>
+            <p>Vai viajar? Reserve sem quaisquer dores de cabeça. Nosso sistema é extremamente prático.</p>
+          </div>
+        </div>
+        <div class="col s12 m4">
+            <div class="card-panel">
+              <i class="material-icons large teal-text">settings_ethernet</i>
+              <h4>Qual sua preferência?</h4>
+              <p>Escolha o carro ideal para você de acordo com as categorias em que desejar!</p>
+            </div>
+          </div>
+    </div>
+  </div>
+</section>
+
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    //side nav
+    const sideNav = document.querySelector('.sidenav');
+    M.Sidenav.init(sideNav,{});
+    //autoccomplete
+    const ac = document.querySelector
+    ('.autocomplete');
+    M.Autocomplete.init(ac,{
+      data:{
+        "Indaiatuba":null,
+        "Sorocaba":null,
+        "Campinas":null,
+        "Hortolandia":null,
+        "Monte-Mor":null,
+        "Valinhos":null,
+      }
+    })    
+  </script>  
+<script>
+  const Calender = document.querySelector('.datepicker');
+  M.Datepicker.init(Calender,{});
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });  
+</script>
+<script>
+    const timer = document.querySelector('.timepicker');
+    M.Timepicker.init(timer,{});
+    $(document).ready(function(){
+      $('.datepicker').datepicker();
+    });  
+  </script>
+
+  <script> $(document).ready(function(){
+      $('.slider').slider();
+    });
+  </script>
+  </body>
+</html>
+        
