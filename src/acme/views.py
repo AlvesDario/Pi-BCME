@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Carro
-from django.contrib.auth.forms import UserCreationForm
+from .models import Carro, Pessoa
+# from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from .forms import PessoaCreateForm, LoginForm
 
 # Create your views here.
 # httpresponse should be given as parameters the path to the html file of the page
@@ -11,17 +12,41 @@ def index(request):
     return render(request, 'acme/index.html')
 
 def login(request):
-    return render(request, 'acme/login.html', {'css': 'acme/login.css'})
+    pessoas = Pessoa.objects.all()
+    # print(pessoas)
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            n = form.cleaned_data.get('user_nome')
+            s = form.cleaned_data.get('user_senha')
+            # print(form, n, s)
+            for pessoa in pessoas:
+                if (pessoa.nome == n) and (pessoa.senha == s):
+                    messages.success(request, f'Login com sucesso, User: {pessoa.nome}')
+                    return redirect('index')
+        messages.warning(request, "usuário ou senha inválidos")
+    return render(request, 'acme/login.html')#, {'css': 'acme/login.css'})
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = PessoaCreateForm(request.POST)
         if form.is_valid():
+            Pessoa.objects.create(
+                CNH = form.CNH,
+                nome = form.nome,
+                senha = form.senha,
+                email = form.email,
+                telefone = form.telefone,
+                endereco = form.endereco,
+                rua = form.rua,
+                cep = form.cep
+            )
             username = form.cleaned_data.get('username')
+            
             messages.success(request, f'Account created for user {username}')
-            return redirect('index')
+            return redirect('login')
     else:
-        form = UserCreationForm()
+        form = PessoaCreateForm()
     return render(request, 'acme/signup.html', { 'form': form })
 
 def cars(request):

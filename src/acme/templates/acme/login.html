@@ -1,22 +1,24 @@
 {% extends "acme/base.html" %}
 {% block content %}
 <div class="container">
-    <form class="form-signin" method="POST">
+    <form class="form-signin" method="POST" style="width: 50%;margin: auto;">
         {% csrf_token %}
-        <img class="mb-4" src="../../static/acme/imgs/pipeline.png" style="display: block;margin: auto;" alt="" width="100" height="100">
+        <img class="mb-4" src="../../static/acme/imgs/pipeline.png" style="display: block;margin: auto;" alt=""
+            width="100" height="100">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="text" id="inputUsername" class="form-control" placeholder="Username" required="" autofocus=""
-            name="username">
+            name="user_nome">
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required=""
-            name="password">
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required
+            name="user_senha">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Do not have an account? <a href="{% url 'signup' %}" s>sign up</a>
+            </small>
+        </div>
     </form>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Do not have an account? <a href="{% url 'signup' %}" s>sign up</a>
-        </small>
-    </div>
+
 </div>
 {% endblock content %}
