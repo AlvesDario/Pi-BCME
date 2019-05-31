@@ -47,7 +47,7 @@
     <!--Mobile navbar left-->
     <ul class="sidenav" id="mobile-nav">
       <li>
-        <a href="#home">Home</a>
+        <a href="{% url 'index' %}">Home</a>
       </li>
       <li>
         <a href="#cars">Carros</a>
@@ -57,6 +57,12 @@
       </li>
       <li>
         <a href="#aboutus">Sobre</a>
+      </li>
+      <li>
+        <a href="sass.html"><i class="material-icons left">shopping_cart</i>Meus carros</a>
+      </li>
+      <li>
+        <a href="{% url 'login' %}"><i class="material-icons left">account_circle</i>Login</a>
       </li>
     </ul>
   </header>
@@ -69,6 +75,10 @@
     {% endfor %}
     {% endif %}
     {% block content %}{% endblock %}
+    <script>
+      const sideNav = document.querySelector('.sidenav');
+        M.Sidenav.init(sideNav, {});
+    </script>
   </main>
   <footer class="page-footer indigo">
     <div class="container">
