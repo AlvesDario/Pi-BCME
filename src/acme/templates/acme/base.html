@@ -28,7 +28,7 @@
                 <a href="{% url 'index' %}">Home</a>
               </li>
               <li>
-                <a href="#cars">Carros</a>
+                <a href="{% url 'carros' %}">Carros</a>
               </li>
               <li>
                 <a href="#offers">Ofertas</a>
@@ -50,7 +50,7 @@
         <a href="{% url 'index' %}">Home</a>
       </li>
       <li>
-        <a href="#cars">Carros</a>
+        <a href="{% url 'carros' %}">Carros</a>
       </li>
       <li>
         <a href="#offers">Ofertas</a>
@@ -68,11 +68,11 @@
   </header>
   <main>
     {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">
-      {{ message }}
-    </div>
-    {% endfor %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
     {% endif %}
     {% block content %}{% endblock %}
     <script>

@@ -32,16 +32,16 @@ def signup(request):
         form = PessoaCreateForm(request.POST)
         if form.is_valid():
             Pessoa.objects.create(
-                CNH = form.CNH,
-                nome = form.nome,
-                senha = form.senha,
-                email = form.email,
-                telefone = form.telefone,
-                endereco = form.endereco,
-                rua = form.rua,
-                cep = form.cep
+                CNH = form.cleaned_data.get('CNH'),
+                nome = form.cleaned_data.get('nome'),
+                senha = form.cleaned_data.get('senha'),
+                email = form.cleaned_data.get('email'),
+                telefone = form.cleaned_data.get('telefone'),
+                endereco = form.cleaned_data.get('endereco'),
+                rua = form.cleaned_data.get('rua'),
+                cep = form.cleaned_data.get('cep')
             )
-            username = form.cleaned_data.get('username')
+            username = form.cleaned_data.get('nome')
             
             messages.success(request, f'Account created for user {username}')
             return redirect('login')
