@@ -4,9 +4,14 @@ from .models import Carro, Pessoa
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import PessoaCreateForm, LoginForm
+# import stripe
 
+# stripe.api_key = "pk_test_LSkKTymuMxmZ468ROAHkVpPT00b7FukC9b"
 # Create your views here.
 # httpresponse should be given as parameters the path to the html file of the page
+
+def checkout(request):
+    return render(request, 'acme/checkout.html')
 
 def index(request):
     return render(request, 'acme/index.html')

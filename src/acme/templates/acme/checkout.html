@@ -1,0 +1,16 @@
+{% extends 'acme/base.html' %}
+{% block content %}
+
+<form action="" method="post">
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_LSkKTymuMxmZ468ROAHkVpPT00b7FukC9b"
+        data-amount="44999"
+        data-name="Pipeline Rent a Car"
+        data-description="Aluguel do carro: Exemplo"
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-locale="auto"
+        data-currency="brl">
+    </script>
+</form>
+
+{% endblock %}
