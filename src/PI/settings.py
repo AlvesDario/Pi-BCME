@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'stripe',
     'acme',
     'PI'
 ]
@@ -121,3 +122,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STRIPE_PUBISHABLE_KEY = 'pk_test_LSkKTymuMxmZ468ROAHkVpPT00b7FukC9b'
+STRIPE_SECRET_KEY = 'sk_test_0OvYvejkyEMfezge0BtR1B8h001muIKqYN'
