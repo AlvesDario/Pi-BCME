@@ -14,6 +14,9 @@ def logedin(request):
         return True
     return False
 
+def logout(request):
+    request.session.flush()
+
 def checkout(request):
     if logedin(request):
         messages.warning(request, "faça o login")
@@ -24,7 +27,7 @@ def index(request):
     return render(request, 'acme/index.html')
 
 def login(request):
-    pessoas = Pessoa.objects.all()
+    # pessoas = Pessoa.objects.all()
     # print(pessoas)
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -32,10 +35,11 @@ def login(request):
             n = form.cleaned_data.get('user_nome')
             s = form.cleaned_data.get('user_senha')
             # print(form, n, s)
-            for pessoa in pessoas:
-                if (pessoa.nome == n) and (pessoa.senha == s):
-                    messages.success(request, f'Login com sucesso, User: {pessoa.nome}')
-                    return redirect('index')
+            query = f"SELECT * FROM acme_pessoa WHERE nome='{n}' AND senha='{s}'"
+            if Pessoa.objects.raw(query):
+                request.session['username'] = n
+                messages.success(request, f'Login com sucesso, User: {pessoa.nome}')
+                return redirect('index')
         messages.warning(request, "usuário ou senha inválidos")
     return render(request, 'acme/login.html')#, {'css': 'acme/login.css'})
 
