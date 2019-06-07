@@ -1,0 +1,17 @@
+<script>
+        //side nav
+        const sideNav = document.querySelector('.sidenav');
+        M.Sidenav.init(sideNav, {});
+        //autoccomplete
+        const ac = document.querySelector('.autocomplete');
+        M.Autocomplete.init(ac, {
+            data: {
+                "Indaiatuba": null,
+                "Sorocaba": null,
+                "Campinas": null,
+                "Hortolandia": null,
+                "Monte-Mor": null,
+                "Valinhos": null,
+            }
+        })
+    </script>
