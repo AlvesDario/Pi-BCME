@@ -9,8 +9,15 @@ from .forms import PessoaCreateForm, LoginForm
 # stripe.api_key = "pk_test_LSkKTymuMxmZ468ROAHkVpPT00b7FukC9b"
 # Create your views here.
 # httpresponse should be given as parameters the path to the html file of the page
+def loggedin(request):
+    if request.session.has_key('user'):
+        return True
+    return False
 
 def checkout(request):
+    if not logedin(request):
+        messages.warning(request, 'faça o login')
+        return redirect('login')
     return render(request, 'acme/checkout.html')
 
 def index(request):
