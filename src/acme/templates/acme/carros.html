@@ -1,13 +1,238 @@
 {% extends 'acme/base.html' %}
+{% load staticfiles %}
 {% block content %}
-  <h1>Carros:</h1>
-  {% for car in cars %}
-  <div>
-    <p>Marca: {{ car.marca.nome }}</p>
-    <p>{{ car.marca.descricao }}</p>
-    <h1><a>{{ car.modelo }}</a></h1>
-    <p>Descrição: {{ car.descricao }}</p>
-    <p>{{ car.ano }}</p>
+<!--Form-->
+<section id="search" class="section blue darken-4 grey-text ">
+  <div class="container">
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">access_time</i>
+            <input type="text" class="timepicker" placeholder="Horário da Retirada">
+          </div>
+          <div class="input-field col s6">
+            <i class="material-icons prefix">av_timer</i>
+            <input type="text" class="timepicker" placeholder="Horário da Devolução">
+          </div>
+          <div class="input-field col s6">
+            <i class="material-icons prefix">perm_contact_calendar</i>
+            <input type="text" class="datepicker" class=" darken-1 grey-text" placeholder="Data Retirada">
+          </div>
+
+          <div class="input-field col s6">
+            <i class="material-icons prefix">chrome_reader_mode</i>
+            <input type="text" class="datepicker" class=" darken-1 grey-text" placeholder="Data da Devolução">
+          </div>
+
+          <div class="input-field col s6">
+            <i class="material-icons prefix">local_taxi</i>
+            <input type="text" class="autocomplete" id="text-input" placeholder="Digite a sua cidade">
+          </div>
+          <div class="input-field col s6">
+            <select>
+              <option class="grey-text" value="" disabled selected>Escolha o UF</option>
+              <option value="AC">AC</option>
+              <option value="AL">AL</option>
+              <option value="AP">AP</option>
+              <option value="AM">AM</option>
+              <option value="BA">BA</option>
+              <option value="CE">CE</option>
+              <option value="DF">DF</option>
+              <option value="ES">ES</option>
+              <option value="GO">GO</option>
+              <option value="MA">MA</option>
+              <option value="MT">MT</option>
+              <option value="MS">MS</option>
+              <option value="MG">MG</option>
+              <option value="PA">PA</option>
+              <option value="PB">PB</option>
+              <option value="PR">PR</option>
+              <option value="PE">PE</option>
+              <option value="PI">PI</option>
+              <option value="RJ">RJ</option>
+              <option value="RN">RN</option>
+              <option value="RS">RS</option>
+              <option value="RO">RO</option>
+              <option value="RR">RR</option>
+              <option value="SC">SC</option>
+              <option value="SP">SP</option>
+              <option value="SE">SE</option>
+              <option value="TO">TO</option>
+            </select>
+          </div>
+          <button class="btn waves-effect waves-light teal" style="float: right;" type="submit" name="action">Enviar
+            <i class="material-icons left">touch_app</i>
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-  {% endfor %}
+</section>
+
+<div class="container">
+  <h1 class="header center light deep-purple-text">Conheça nossa frota</h1>
+  <div class="row center">
+    <h5 class="header col s12 light deep-purple-text">Nossa vasta coleção de automóveis contém três diferentes
+      categorias, escolha a que mais se adequa a você.</h5>
+  </div>
+  <div class="card-tabs">
+    <ul class="tabs tabs-fixed-width tabs-transparent">
+      <li class="tab indigo " style="color:azure">Econômico</li>
+      <li class="tab indigo " style="color:azure">Intermediário</li>
+      <li class="tab indigo " style="color:azure">Executivo</li>
+    </ul>
+  </div>
+  <div class="row">
+    <!--Econômico-->
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-image">
+          <img src="{% static 'acme/imgs/cars/economy/Nissan New March.png' %}">
+          <a class="btn-floating halfway-fab red modal-trigger" href="#modal1"><i
+              class="material-icons">panorama</i></a>
+        </div>
+        <div class="card-content"><br>
+          <p style="text-align: justify">Carros com consumo abaixo da média e bastante autonomia. Selecione para saber
+            mais sobre a classe econômica.</p>
+        </div>
+      </div>
+    </div>
+    <!--Intermediario-->
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-image">
+          <img src="{% static 'acme/imgs/cars/economy/Volkswagen Polo.png' %}">
+          <a class="btn-floating halfway-fab red modal-trigger" href="#modal2"><i
+              class="material-icons">panorama</i></a>
+        </div>
+        <div class="card-content"><br>
+          <p style="text-align: justify">Carros com um bom conforto e esportividade. Clique no botão de seleção para
+            saber mais sobre a categoria intermediária. </p>
+        </div>
+      </div>
+    </div>
+    <!--Executivo-->
+    <div class="col s12 l4">
+      <div class="card">
+        <div class="card-image">
+          <img src="{% static 'acme/imgs/cars/Executive/Hyundai.png' %}">
+          <a class="btn-floating halfway-fab red modal-trigger" href="#modal3"><i
+              class="material-icons">panorama</i></a>
+        </div>
+        <div class="card-content"><br>
+          <p style="text-align: justify">Carros com excelente segurança e tecnologia. Clique no botão de seleção para
+            saber mais sobre a categoria executiva. </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<h1>Carros:</h1>
+{% for car in cars %}
+<div>
+  <p>Marca: {{ car.marca.nome }}</p>
+  <p>{{ car.marca.descricao }}</p>
+  <h1><a>{{ car.modelo }}</a></h1>
+  <p>Descrição: {{ car.descricao }}</p>
+  <p>{{ car.ano }}</p>
+</div>
+{% endfor %}
+
+<!--Card para exibição das categorias dos carros (Economicos/ Intermediarios/ Executivos-->
+
+
+<!-- Estrutura modal da classe econômica -->
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <ul>
+      <!-- Parte de exibição -->
+
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close light dark btn-flat">Close</a>
+  </div>
+</div>
+
+<!-- Estrutura modal da classe intermediária -->
+
+<div id="modal2" class="modal">
+  <div class="modal-content">
+    <ul>
+      <!-- Parte de exibição -->
+
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close light dark btn-flat">Close</a>
+  </div>
+</div>
+
+<!-- Estrutura modal da classe executiva -->
+
+<div id="modal3" class="modal">
+  <div class="modal-content">
+    <ul>
+      <!-- Parte de exibição -->
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close light dark btn-flat">Close</a>
+  </div>
+</div>
+
+<!-- Parallax da parte de baixo do site -->
+
+<div id="index-banner" class="parallax-container">
+  <div class="parallax"><img src="http://www.gplsalvador.org/site/wp-content/uploads/2017/12/1453055953.jpg"
+      alt="Unsplashed background img 1"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="js/materialize.min.js" type="text/javascript"></script>
+<script src="js/custom.js" type="text/javascript"></script>
+
+<script>
+  //Datepicker
+  const Calender = document.querySelector('.datepicker');
+  M.Datepicker.init(Calender, {});
+  $(document).ready(function () {
+    $('.datepicker').datepicker();
+  });
+  //Timepicker
+  const timer = document.querySelector('.timepicker');
+  M.Timepicker.init(timer, {});
+  $(document).ready(function () {
+    $('.timepicker').timepicker();
+  });
+  //Slides
+  const slider = document.querySelector('.slider');
+  M.Slider.init(slider, {
+
+    height: 500,
+    transition: 500,
+    interval: 6000
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, options);
+  });
+
+  $(document).ready(function () {
+    $('select').formSelect();
+  });
+
+  $(document).ready(function () {
+    $('.parallax').parallax();
+  });
+
+  $(document).ready(function () {
+    $('.modal').modal();
+  });
+</script>
 {% endblock %}
