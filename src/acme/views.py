@@ -9,26 +9,35 @@ from .forms import PessoaCreateForm, LoginForm
 # stripe.api_key = "pk_test_LSkKTymuMxmZ468ROAHkVpPT00b7FukC9b"
 # Create your views here.
 # httpresponse should be given as parameters the path to the html file of the page
+def logedin(request):
+    if request.session.has_hey('user'):
+        return True
+    return False
+
+def logout(request):
+    request.session.flush()
+    return redirect('login')
 
 def checkout(request):
+    if logedin(request):
+        messages.warning(request, "faça o login")
+        return redirect('login')
     return render(request, 'acme/checkout.html')
 
 def index(request):
     return render(request, 'acme/index.html')
 
 def login(request):
-    pessoas = Pessoa.objects.all()
-    # print(pessoas)
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
             n = form.cleaned_data.get('user_nome')
             s = form.cleaned_data.get('user_senha')
-            # print(form, n, s)
-            for pessoa in pessoas:
-                if (pessoa.nome == n) and (pessoa.senha == s):
-                    messages.success(request, f'Login com sucesso, User: {pessoa.nome}')
-                    return redirect('index')
+            query = f"SELECT * FROM acme_pessoa WHERE nome='{n}' AND senha='{s}'"
+            if Pessoa.objects.raw(query):
+                request.session['username'] = n
+                messages.success(request, f'Login com sucesso, User: {pessoa.nome}')
+                return redirect('index')
         messages.warning(request, "usuário ou senha inválidos")
     return render(request, 'acme/login.html')#, {'css': 'acme/login.css'})
 
@@ -47,7 +56,6 @@ def signup(request):
                 cep = form.cleaned_data.get('cep')
             )
             username = form.cleaned_data.get('nome')
-            
             messages.success(request, f'Account created for user {username}')
             return redirect('login')
     else:
@@ -55,7 +63,8 @@ def signup(request):
     return render(request, 'acme/signup.html', { 'form': form })
 
 def cars(request):
-    return HttpResponse('cars')
+    carros = Carro.objects.all()
+    return render(request, 'acme/carros.html', {'cars': carros})
 
 def offers(request):
     return HttpResponse('offers')
@@ -65,7 +74,3 @@ def about(request):
 
 def account(request):
     return HttpResponse('account')
-
-def get_cars(request):
-    carros = Carro.objects.all()
-    return render(request, 'acme/carros.html', {'cars': carros})
