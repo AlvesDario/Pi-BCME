@@ -21,6 +21,7 @@ class Carro(models.Model):
     categoria = models.ForeignKey('Categoria', on_delete = models.CASCADE)
     ano = models.CharField(max_length = 4)
     descricao = models.CharField(max_length = 200)
+    imagem = models.ImageField(upload_to='images/')
     def __str__(self):
         return self.modelo
     def publicar(self):
