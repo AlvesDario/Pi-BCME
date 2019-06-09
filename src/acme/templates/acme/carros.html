@@ -1,19 +1,6 @@
 {% extends 'acme/base.html' %}
 {% load staticfiles %}
 {% block content %}
-<<<<<<< HEAD
-  <h1>Carros:</h1>
-  {% for car in cars %}
-  <div>
-    <p>Marca: {{ car.marca.nome }}</p>
-    <p>{{ car.marca.descricao }}</p>
-    <h1><a>{{ car.modelo }}</a></h1>
-    <p>Descrição: {{ car.descricao }}</p>
-    <p>{{ car.ano }}</p>
-    <img src="../{{car.imagem.url}}" alt="">
-  </div>
-  {% endfor %}
-=======
 <!--Form-->
 <section id="search" class="section blue darken-4 grey-text ">
   <div class="container">
@@ -248,5 +235,4 @@
     $('.modal').modal();
   });
 </script>
->>>>>>> master
 {% endblock %}
