@@ -67,7 +67,7 @@ def cars(request):
     return render(request, 'acme/carros.html', {'cars': carros})
 
 def offers(request):
-    return HttpResponse('offers')
+    return render(request, 'acme/offers.html')
 
 def about(request):
     return HttpResponse('about')
