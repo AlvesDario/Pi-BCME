@@ -10,7 +10,7 @@ from .forms import PessoaCreateForm, LoginForm
 # Create your views here.
 # httpresponse should be given as parameters the path to the html file of the page
 def logedin(request):
-    if request.session.has_hey('user'):
+    if request.session.has_hey('username'):
         return True
     return False
 
@@ -25,7 +25,10 @@ def checkout(request):
     return render(request, 'acme/checkout.html')
 
 def index(request):
-    return render(request, 'acme/index.html')
+    context={
+        'logedin': logedin(request),
+    }
+    return render(request, 'acme/index.html', context)
 
 def login(request):
     if request.method == 'POST':
