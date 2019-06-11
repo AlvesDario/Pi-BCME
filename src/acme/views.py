@@ -70,8 +70,9 @@ def cars(request):
     return render(request, 'acme/carros.html', {'cars': carros})
 
 def offers(request):
+    # print(request.GET['q'])
     if request.method == 'POST':
-        print(request.POST.modelo)
+        print(request.POST['modelo'])
     ofertas = Publicacao.objects.all()
     print(ofertas[0].carro.imagem,"_")
     return render(request, 'acme/offers.html', {'offers': ofertas})
