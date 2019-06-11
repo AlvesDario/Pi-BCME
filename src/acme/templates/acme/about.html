@@ -1,0 +1,156 @@
+{% extends 'acme/base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'acme/css/historico.css' %}">
+{% endblock %}
+{% block content %}
+<div class="slider" style="height: 540px;">
+  <ul class="slides" style="height: 500px;">
+    <li class="active" style="opacity: 1; transform: translateX(0px) translateY(0px);">
+      <img src="data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+        style="background-image: url(&quot;https://painelnegocios.com.br/wp-content/uploads/2018/02/como-painel-negocios-podemos-te-ajudar-com-nossas-solucoes-para-padronizacao-5314x2657.jpg&quot;);">
+      <!-- random image -->
+      <div class="caption center-align" style="opacity: 1; transform: translateX(0px) translateY(0px);">
+        <h3>Pipeline Rent a Car</h3>
+        <h5 class="light grey-text text-lighten-3">Precisa de carros para o seu negócio? Nós temos a
+          solução!</h5>
+      </div>
+    </li>
+    <li style="opacity: 0; transform: translateX(0px) translateY(0px);" class="">
+      <img src="data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+        style="background-image: url(&quot;http://t2aclube.com.br/wp-content/uploads/2013/09/drive-experience-1920x1090.jpg&quot;);">
+      <!-- random image -->
+      <div class="caption right-align" style="opacity: 0; transform: translateX(100px);">
+        <h3>Liberdade e conforto</h3>
+        <h5 class="light grey-text text-lighten-3">Viaje, trabalhe e divirta-se</h5>
+      </div>
+    </li>
+  </ul>
+  <ul class="indicators">
+    <li class="indicator-item active"></li>
+    <li class="indicator-item"></li>
+  </ul>
+</div>
+
+<div class="container">
+  <h5 class="light">Quem Somos</h5>
+  <p style="text-align: justify;">
+    ​​​​​Uma empresa especializada em aluguel de carros no Brasil. Com nossa excelente qualidade, gostaríamos de
+    convidar você a repensar e a construir um novo significado para a mobilidade.
+    <br><br> Porque, para nós, mobilidade tem tudo a ver com liberdade. É poder chegar aonde você quer da
+    maneira mais prática e segura possível. Nós adoramos essa liberdade, mas também entendemos que ela possui
+    diferentes significados para cada um. Por isso, nossa missão é oferecer a você a melhor opção para estar ao
+    seu lado em cada trajeto.
+    <br><br> Temos o cuidado de disponibilizar a vocês o veículo ideal para cada tipo de roteiro. Apesar dos
+    carros serem feitos em série, suas viagens não são. Estamos ao seu lado com 20 agências nas principais
+    cidades do estado de São Paulo. Com uma frota de mais de 50 tipos carros disponíveis, você escolhe o tipo de
+    veículo que melhor se encaixa à sua necessidade.
+    <br><br> Temos orgulho em dizer que a Pipeline oferece hoje a melhor experiência em mobilidade do Brasil.
+  </p>
+
+  <p style="text-align: justify;">
+    Nossos valores orientam o nosso trabalho e representam aquilo que temos de melhor.
+    <br><br>
+
+    Propósito: Com você, construindo o futuro da mobilidade.​
+    <br><br>
+    Valores:
+  </p>
+  <ol>
+    <li>Cliente é a nossa paixão.</li>
+    <li>Gente que inspira e transforma.</li>
+    <li>Resultados extraordinários nos impulsionam.</li>
+  </ol>
+  <p></p>
+  <br>
+  <h5 class="light">Nossa história</h5>
+  <br><br><br>
+
+  <div class="historico">
+    <div class="tempo">
+      <div class="data">
+        <p class="year">2016</p>
+        <p class="name">Fundação</p>
+        <div class="seta-verde"></div>
+      </div>
+      <div class="acontecimento">
+        <div class="text-acontecimento">
+          <p>Uma pequena agência de aluguel de carros no centro de Indaiatuba com seis carros usados
+            comprados a crédito deu início ao sonho de construir uma grande empresa.</p>
+        </div>
+        <div class="seta-cinza" style="top: 51.5px;"></div>
+      </div>
+
+    </div>
+    <div class="tempo">
+      <div class="data">
+        <p class="year">2017</p>
+        <p class="name">Início da expansão</p>
+        <div class="seta-verde"></div>
+      </div>
+      <div class="acontecimento">
+        <div class="text-acontecimento">
+          <p>Durante o segundo choque do petróleo, abrimos nossa 1ª filial de agência de locação de carros
+            em Campinas.&nbsp;</p>
+        </div>
+        <div class="seta-cinza" style="top: 51.5px;"></div>
+      </div>
+
+    </div>
+    <div class="tempo">
+      <div class="data">
+        <p class="year">2018</p>
+        <p class="name">Liderança</p>
+        <div class="seta-verde"></div>
+      </div>
+      <div class="acontecimento">
+        <div class="text-acontecimento">
+          <p>Expandimos a rede por meio da aquisição de pequenos concorrentes.</p>
+        </div>
+        <div class="seta-cinza" style="top: 51.5px;"></div>
+      </div>
+
+    </div>
+    <div class="tempo">
+      <div class="data">
+        <p class="year">2019</p>
+        <p class="name">Plataforma Digital</p>
+        <div class="seta-verde"></div>
+      </div>
+      <div class="acontecimento">
+        <div class="text-acontecimento">
+          <p>Graças a nossa parceria com a BCME, conseguimos
+            um site perfeito para você locar seu carro onde quiser!
+          </p>
+        </div>
+        <div class="seta-cinza" style="top: 51.5px;"></div>
+      </div>
+
+    </div>
+    <br><br>
+  </div>
+</div>
+<script>
+  //Slides
+  const slider = document.querySelector('.slider');
+  M.Slider.init(slider, {
+
+    height: 500,
+    transition: 500,
+    interval: 6000
+  });
+  document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function () {
+    $('select').formSelect();
+  });
+  $(document).ready(function () {
+    $('.carousel').carousel();
+  });
+</script>
+{% endblock %}

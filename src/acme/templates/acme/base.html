@@ -51,10 +51,15 @@
                 <a href="{% url 'offers' %}">Ofertas</a>
               </li>
               <li>
-                <a href="#aboutus">Sobre</a>
+                <a href="{% url 'about' %}">Sobre</a>
               </li>
-              <li><a href="sass.html"><i class="material-icons left">shopping_cart</i>Meus carros</a></li>
+              
+              {% if logedin %}
+              <li><a href="{% url 'account' %}"><i class="material-icons left">shopping_cart</i>Meus carros</a></li>
+              <li><a href="{% url 'logout' %}"><i class="material-icons left">account_circle</i>Logout</a></li>
+              {% else %}
               <li><a href="{% url 'login' %}"><i class="material-icons left">account_circle</i>Login</a></li>
+              {% endif %}
             </ul>
             </ul>
           </div>
@@ -73,10 +78,10 @@
         <a href="{% url 'offers' %}">Ofertas</a>
       </li>
       <li>
-        <a href="#aboutus">Sobre</a>
+        <a href="{% url 'about' %}">Sobre</a>
       </li>
       <li>
-        <a href="sass.html"><i class="material-icons left">shopping_cart</i>Meus carros</a>
+        <a href="{% url 'account' %}"><i class="material-icons left">shopping_cart</i>Meus carros</a>
       </li>
       <li>
         <a href="{% url 'login' %}"><i class="material-icons left">account_circle</i>Login</a>

@@ -1,0 +1,142 @@
+#lista_historico {
+    overflow: hidden;
+}
+
+.historico {
+    position: relative;
+    margin-top: -63px;
+}
+
+.historico .tempo {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 0px;
+    position: relative;
+}
+
+.historico .tempo .data {
+    width: 320px;
+    background: #3d5afe ;
+    padding: 15px;
+    color: #fff;
+    float: left;
+    position: relative;
+}
+
+.historico .tempo .data .year {
+    font-family: LocalizaDinDisplay_BdIt;
+    font-size: 52px;
+    line-height: 52px;
+    margin: 0;
+}
+
+.historico .tempo .data .name {
+    font: 400 18px LocalizaDinDisplay_Medium;
+    line-height: 1.2em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.historico .tempo .ball {
+    width: 11px;
+    height: 11px;
+    background:#3d5afe ;
+    float: left;
+    margin-left: 14px;
+    border-radius: 50%;
+}
+
+.historico .tempo .acontecimento {
+    width: 623px;
+    float: right;
+    background: #e3e3e3;
+    padding: 20px;
+    position: relative;
+    min-height: 103px;
+}
+
+.historico .tempo .acontecimento p {
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.historico .tempo .acontecimento p:last-child {
+    margin-bottom: 0;
+}
+
+.historico .tempo .acontecimento .wrapper-img {
+    width: 583px;
+    max-height: 360px;
+    overflow: hidden;
+    padding: 10px;
+    background: #fff;
+    margin: 0 auto 20px;
+    border: 1px solid #d7d7d7;
+}
+
+.historico .tempo .acontecimento .unico-img {
+    position: absolute;
+    width: 130px;
+    height: 100%;
+    overflow: hidden;
+    margin-right: 40px;
+    float: left;
+}
+
+.historico .tempo .acontecimento .unico-img img {
+    width: 100%;
+}
+
+.historico .tempo .acontecimento .unico-p {
+    width: 400px;
+    float: right;
+}
+
+.historico .tempo .acontecimento .big-img {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.historico .tempo .acontecimento .big-img img {
+    width: 100%;
+}
+
+.historico .tempo .acontecimento .cotacao {
+    font-size: 10px;
+}
+
+.historico .tempo .seta-verde {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    content: "";
+    width: 0;
+    height: 0;
+    margin-top: -10px;
+    border: 10px solid transparent;
+    border-left-color:#009688 ;
+}
+
+.historico .tempo .seta-cinza {
+    position: absolute;
+    left: -20px;
+    content: "";
+    width: 0;
+    height: 0;
+    margin-top: -10px;
+    border: 10px solid transparent;
+    border-right-color: #e3e3e3;
+}
+
+.historico .tempo-1 {
+    margin-top: 0 !important;
+}
+
+.historico .linha {
+    width: 3px;
+    height: 9999px;
+    background: #00984a;
+    position: absolute;
+    top: 0;
+    left: 338px;
+}
