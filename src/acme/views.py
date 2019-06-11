@@ -1,16 +1,16 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Carro, Pessoa, Publicacao
+from .models import Carro, Pessoa, Publicacao, Aluguel, Agendamento
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .forms import PessoaCreateForm, LoginForm
+from .forms import PessoaCreateForm, LoginForm, AgendamentoForm
 # import stripe
 
 # stripe.api_key = "pk_test_LSkKTymuMxmZ468ROAHkVpPT00b7FukC9b"
 # Create your views here.
 # httpresponse should be given as parameters the path to the html file of the page
 def logedin(request):
-    if not request.session.has_key('username'):
+    if request.session.has_key('username'):
         return True
     return False
 
@@ -25,10 +25,19 @@ def checkout(request):
     return render(request, 'acme/checkout.html')
 
 def index(request):
-    # context={
-    #     'logedin': logedin(request),
-    # }
-    return render(request, 'acme/index.html')#, context)
+    if request.method == 'POST':
+        if logedin(request):
+            messages.warning(request, "faça o login")
+            return redirect('login')
+        form = AgendamentoForm(request.POST)
+        print(form.is_valid())
+        if form.is_valid():
+            print(form.cleaned_data.get('estado'))
+            messages.success(request, "Solicitação de agendamento feita com sucesso, entraremos em contato")
+    context={
+        'logedin': logedin(request),
+    }
+    return render(request, 'acme/index.html', context)
 
 def login(request):
     if request.method == 'POST':
@@ -69,16 +78,19 @@ def cars(request):
     carros = Carro.objects.all()
     return render(request, 'acme/carros.html', {'cars': carros})
 
+def account(request):
+    if logedin(request):
+        messages.warning(request, "faça o login")
+        return redirect('login')
+    return render(request, 'acme/account.html')
+
 def offers(request):
     # print(request.GET['q'])
     if request.method == 'POST':
         print(request.POST['modelo'])
     ofertas = Publicacao.objects.all()
-    print(ofertas[0].carro.imagem,"_")
+    # print(ofertas[0].carro.imagem,"_")
     return render(request, 'acme/offers.html', {'offers': ofertas})
 
 def about(request):
-    return HttpResponse('about')
-
-def account(request):
-    return HttpResponse('account')
+    return render(request, 'acme/about.html')
