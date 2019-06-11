@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Carro, Pessoa
+from .models import Carro, Pessoa, Publicacao
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import PessoaCreateForm, LoginForm
@@ -10,7 +10,7 @@ from .forms import PessoaCreateForm, LoginForm
 # Create your views here.
 # httpresponse should be given as parameters the path to the html file of the page
 def logedin(request):
-    if request.session.has_hey('username'):
+    if not request.session.has_key('username'):
         return True
     return False
 
@@ -25,10 +25,10 @@ def checkout(request):
     return render(request, 'acme/checkout.html')
 
 def index(request):
-    context={
-        'logedin': logedin(request),
-    }
-    return render(request, 'acme/index.html', context)
+    # context={
+    #     'logedin': logedin(request),
+    # }
+    return render(request, 'acme/index.html')#, context)
 
 def login(request):
     if request.method == 'POST':
@@ -39,7 +39,7 @@ def login(request):
             query = f"SELECT * FROM acme_pessoa WHERE nome='{n}' AND senha='{s}'"
             if Pessoa.objects.raw(query):
                 request.session['username'] = n
-                messages.success(request, f'Login com sucesso, User: {pessoa.nome}')
+                messages.success(request, f'Login com sucesso, User: {n}')
                 return redirect('index')
         messages.warning(request, "usuário ou senha inválidos")
     return render(request, 'acme/login.html')#, {'css': 'acme/login.css'})
@@ -70,7 +70,11 @@ def cars(request):
     return render(request, 'acme/carros.html', {'cars': carros})
 
 def offers(request):
-    return render(request, 'acme/offers.html')
+    if request.method == 'POST':
+        print(request.POST.modelo)
+    ofertas = Publicacao.objects.all()
+    print(ofertas[0].carro.imagem,"_")
+    return render(request, 'acme/offers.html', {'offers': ofertas})
 
 def about(request):
     return HttpResponse('about')

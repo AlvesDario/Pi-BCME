@@ -5,11 +5,12 @@
 <section id="search" class="section  blue darken-4 grey-text ">
   <div class="container">
     <div class="row">
-      <form class="col s12">
+      <form class="col s12" method = "POST">
+        {% csrf_token %}
         <div class="row">
           <div class="input-field col s6">
             <i class="material-icons prefix">near_me</i>
-            <input type="text" class="autocomplete" id="text-input" placeholder="Modelo">
+            <input type="text" class="autocomplete" id="text-input" placeholder="Modelo" name="modelo">
           </div>
           <div class="input-field col s6">
             <i class="material-icons prefix">local_taxi</i>
@@ -27,10 +28,10 @@
             <!-- Switch -->
             <div class="switch">
               <label class="white-text">
-                Por kilometro
+                Por dia
                 <input type="checkbox">
                 <span class="lever"></span>
-                Por dia
+                Por kilometro
               </label>
             </div>
           </div>
@@ -48,7 +49,25 @@
 <div class="container">
   <p class="light">Confira abaixo nossa lista de carros com os respectivos preços.</p>
   <div class="row">
+    {% for oferta in offers %}
     <div class="col s12 m4">
+      <div class="card">
+        <div class="card-image">
+          <img src="../../media/{{oferta.carro.imagem}}">
+        </div>
+        <div class="card-content">
+          <h4><a href="{% url 'checkout' %}">{{oferta.carro.modelo}}</a></h4>
+          <p>{{oferta.descricao}} </p>
+          <p>Ano: {{oferta.carro.ano}}</p>
+          <p>Marca: {{oferta.carro.marca.nome}}</p>
+          <p>Preço por km: R$ 2,0</p>
+          <p>Preço por dia: R$ 80</p>
+          <p>Verão: Completa</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <!-- <div class="col s12 m4">
       <div class="card">
         <div class="card-image">
           <img src="_outros/_Cars/Economy/Chevrolet Celta.png">
@@ -65,21 +84,21 @@
       </div>
     </div>
     <div class="col s12 m4">
-      <div class="card">
-        <div class="card-image">
-          <img src="_outros/_Cars/Economy/Chevrolet Celta.png">
-        </div>
-        <div class="card-content">
-          <h4>Lorem ipsum</h4>
-          <p>Modelo: Lorem ipsum</p>
-          <p>Ano: 2019</p>
-          <p>Marca: Dolor</p>
-          <p>Preço por km: R$ 2,0</p>
-          <p>Preço por dia: R$ 80</p>
-          <p>Verão: Completa</p>
+        <div class="card">
+          <div class="card-image">
+            <img src="_outros/_Cars/Economy/Chevrolet Celta.png">
+          </div>
+          <div class="card-content">
+            <h4>Lorem ipsum</h4>
+            <p>Modelo: celta</p>
+            <p>Ano: 2019</p>
+            <p>Marca: Dolor</p>
+            <p>Preço por km: R$ 2,0</p>
+            <p>Preço por dia: R$ 80</p>
+            <p>Verão: Completa</p>
+          </div>
         </div>
       </div>
-    </div>
     <div class="col s12 m4">
       <div class="card">
         <div class="card-image">
@@ -95,7 +114,7 @@
           <p>Verão: Completa</p>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
 

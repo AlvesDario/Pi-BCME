@@ -54,5 +54,6 @@ class Aluguel(models.Model):
     publicacao = models.ForeignKey('Publicacao', on_delete = models.CASCADE)
     data_retirada = models.DateTimeField()
     data_retorno = models.DateTimeField()
+    perkm = models.BooleanField()
     def __str__(self):
         return f'{self.pessoa.nome} <-> {self.publicacao.carro.modelo}'
