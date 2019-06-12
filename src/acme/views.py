@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Carro, Pessoa, Publicacao, Aluguel, Agendamento
-# from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import PessoaCreateForm, LoginForm, AgendamentoForm
 # import stripe
@@ -19,10 +18,13 @@ def logout(request):
     return redirect('login')
 
 def checkout(request):
-    if logedin(request):
+    if not logedin(request):
         messages.warning(request, "faça o login")
         return redirect('login')
-    return render(request, 'acme/checkout.html')
+    context={
+        'logedin': logedin(request),
+    }
+    return render(request, 'acme/checkout.html', context)
 
 def index(request):
     if request.method == 'POST':
@@ -51,9 +53,12 @@ def login(request):
                 messages.success(request, f'Login com sucesso, User: {n}')
                 return redirect('index')
         messages.warning(request, "usuário ou senha inválidos")
-    return render(request, 'acme/login.html')#, {'css': 'acme/login.css'})
+    return render(request, 'acme/login.html')
 
 def signup(request):
+    context={
+        'logedin': logedin(request),
+    }
     if request.method == 'POST':
         form = PessoaCreateForm(request.POST)
         if form.is_valid():
@@ -71,26 +76,31 @@ def signup(request):
             messages.success(request, f'Account created for user {username}')
             return redirect('login')
     else:
-        form = PessoaCreateForm()
-    return render(request, 'acme/signup.html', { 'form': form })
+        context['form'] = PessoaCreateForm()
+    return render(request, 'acme/signup.html', context)
 
 def cars(request):
     carros = Carro.objects.all()
     return render(request, 'acme/carros.html', {'cars': carros})
 
 def account(request):
-    if logedin(request):
+    if not logedin(request):
         messages.warning(request, "faça o login")
         return redirect('login')
-    return render(request, 'acme/account.html')
+    context={
+        'logedin': logedin(request),
+    }
+    return render(request, 'acme/account.html', context)
 
 def offers(request):
-    # print(request.GET['q'])
+    context={
+        'logedin': logedin(request),
+    }
     if request.method == 'POST':
         print(request.POST['modelo'])
     ofertas = Publicacao.objects.all()
-    # print(ofertas[0].carro.imagem,"_")
-    return render(request, 'acme/offers.html', {'offers': ofertas})
+    context['offers'] = ofertas
+    return render(request, 'acme/offers.html', context)
 
 def about(request):
     return render(request, 'acme/about.html')

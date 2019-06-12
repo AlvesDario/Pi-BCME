@@ -56,7 +56,7 @@
           <img src="../../media/{{oferta.carro.imagem}}">
         </div>
         <div class="card-content">
-          <h4><a href="{% url 'checkout' %}">{{oferta.carro.modelo}}</a></h4>
+          <h4><a href="{% url 'checkout' %}?announce={{oferta}}">{{oferta.carro.modelo}}</a></h4>
           <p>{{oferta.descricao}} </p>
           <p>Ano: {{oferta.carro.ano}}</p>
           <p>Marca: {{oferta.carro.marca.nome}}</p>
@@ -67,54 +67,6 @@
       </div>
     </div>
     {% endfor %}
-    <!-- <div class="col s12 m4">
-      <div class="card">
-        <div class="card-image">
-          <img src="_outros/_Cars/Economy/Chevrolet Celta.png">
-        </div>
-        <div class="card-content">
-          <h4>Lorem ipsum</h4>
-          <p>Modelo: Lorem ipsum</p>
-          <p>Ano: 2019</p>
-          <p>Marca: Dolor</p>
-          <p>Preço por km: R$ 2,0</p>
-          <p>Preço por dia: R$ 80</p>
-          <p>Verão: Completa</p>
-        </div>
-      </div>
-    </div>
-    <div class="col s12 m4">
-        <div class="card">
-          <div class="card-image">
-            <img src="_outros/_Cars/Economy/Chevrolet Celta.png">
-          </div>
-          <div class="card-content">
-            <h4>Lorem ipsum</h4>
-            <p>Modelo: celta</p>
-            <p>Ano: 2019</p>
-            <p>Marca: Dolor</p>
-            <p>Preço por km: R$ 2,0</p>
-            <p>Preço por dia: R$ 80</p>
-            <p>Verão: Completa</p>
-          </div>
-        </div>
-      </div>
-    <div class="col s12 m4">
-      <div class="card">
-        <div class="card-image">
-          <img src="_outros/_Cars/Economy/Chevrolet Celta.png">
-        </div>
-        <div class="card-content">
-          <h4>Lorem ipsum</h4>
-          <p>Modelo: Lorem ipsum</p>
-          <p>Ano: 2019</p>
-          <p>Marca: Dolor</p>
-          <p>Preço por km: R$ 2,0</p>
-          <p>Preço por dia: R$ 80</p>
-          <p>Verão: Completa</p>
-        </div>
-      </div>
-    </div> -->
   </div>
 </div>
 
