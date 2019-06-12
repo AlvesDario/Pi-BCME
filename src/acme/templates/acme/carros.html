@@ -207,7 +207,10 @@
   const timer = document.querySelector('.timepicker');
   M.Timepicker.init(timer, {});
   $(document).ready(function () {
-    $('.timepicker').timepicker();
+    $('.timepicker').timepicker({
+      twelveHour: false
+    });
+    
   });
   //Slides
   const slider = document.querySelector('.slider');
