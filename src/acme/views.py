@@ -96,6 +96,8 @@ def account(request):
     context={
         'logedin': logedin(request),
     }
+    query = f"SELECT * FROM acme_pessoa WHERE nome='{request.session.get('username')}'"
+    Pessoa.objects.raw()
     return render(request, 'acme/account.html', context)
 
 def offers(request):
@@ -107,13 +109,15 @@ def offers(request):
         form = BuscaForm(request.POST)
         print(form.is_valid())
         if form.is_valid():
-            query = f"SELECT * FROM acme_publicacao WHERE preco>={form.cleaned_data.get('minpreco')} "
-            # if form.cleaned_data.get('modelo'):
-            #     query+=f"and carro IN (SELECT * FROM acme_carro WHERE modelo like '%{form.cleaned_data.get('modelo')}%')"
-            # if form.cleaned_data.get('marca'):
-            #     query+=f"and  IN (SELECT * FROM acme_carro WHERE modelo like '%{form.cleaned_data.get('modelo')}%')"
+            ofertas = ofertas.filter(preco__gte=form.cleaned_data.get('minpreco'))
+            if form.cleaned_data.get('modelo'):
+                ofertas = ofertas.filter(carro__modelo__contains=form.cleaned_data.get('modelo'))
+            if form.cleaned_data.get('marca'):
+                ofertas = ofertas.filter(carro__marca__nome__contains=form.cleaned_data.get('marca'))
+            if form.cleaned_data.get('maxpreco'):
+                ofertas = ofertas.filter(preco__lte=form.cleaned_data.get('maxpreco'))
                 
-            ofertas = Publicacao.objects.raw(query)
+            # ofertas = Publicacao.objects.raw(query)
     context['offers'] = ofertas
     return render(request, 'acme/offers.html', context)
 
