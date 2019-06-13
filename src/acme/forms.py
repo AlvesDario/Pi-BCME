@@ -21,3 +21,10 @@ class AgendamentoForm(forms.Form):
     hora_retorno = forms.TimeField(input_formats=['%H:%M'])
     cidade = forms.CharField(max_length=20)
     estado = forms.CharField(max_length=2)
+
+class BuscaForm(forms.Form):
+    modelo = forms.CharField(max_length=20,required=False)
+    marca = forms.CharField(max_length=20,required=False)
+    minpreco = forms.FloatField()
+    maxpreco = forms.FloatField(required=False)
+    perkm = forms.BooleanField(required=False)

@@ -14,22 +14,22 @@
           </div>
           <div class="input-field col s6">
             <i class="material-icons prefix">local_taxi</i>
-            <input type="text" class="autocomplete" id="text-input" placeholder="Marca">
+            <input type="text" class="autocomplete" id="text-input" placeholder="Marca" name="marca">
           </div>
           <div class="input-field col s6">
             <i class="material-icons prefix">navigate_before</i>
-            <input type="text" class="autocomplete" id="text-input" placeholder="Preço mínimo">
+            <input type="text" class="autocomplete" id="text-input" placeholder="Preço mínimo" name="minpreco" value="0">
           </div>
           <div class="input-field col s6">
             <i class="material-icons prefix">navigate_next</i>
-            <input type="text" class="autocomplete" id="text-input" placeholder="Preço máximo">
+            <input type="text" class="autocomplete" id="text-input" placeholder="Preço máximo" name="maxpreco">
           </div>
           <div class="col s6">
             <!-- Switch -->
             <div class="switch">
               <label class="white-text">
                 Por dia
-                <input type="checkbox">
+                <input type="checkbox" name="perkm">
                 <span class="lever"></span>
                 Por kilometro
               </label>
@@ -56,13 +56,15 @@
           <img src="../../media/{{oferta.carro.imagem}}">
         </div>
         <div class="card-content">
-          <h4><a href="{% url 'checkout' %}?announce={{oferta}}">{{oferta.carro.modelo}}</a></h4>
-          <p>{{oferta.descricao}} </p>
+          <h4><a href="{% url 'checkout' %}?announce={{oferta.publicacaoID}}">{{oferta.carro.modelo}}</a></h4>
+          <p>{{oferta.descricao}}</p>
           <p>Ano: {{oferta.carro.ano}}</p>
           <p>Marca: {{oferta.carro.marca.nome}}</p>
-          <p>Preço por km: R$ 2,0</p>
-          <p>Preço por dia: R$ 80</p>
-          <p>Verão: Completa</p>
+          {% if oferta.perkm %}
+          <p>Preço por km: R$ {{oferta.preco}}</p>
+          {% else %}
+          <p>Preço por dia: R$ {{oferta.preco}}</p>
+          {% endif %}
         </div>
       </div>
     </div>

@@ -8,14 +8,6 @@
         {% csrf_token %}
         <div class="row">
           <div class="input-field col s6">
-            <i class="material-icons prefix">access_time</i>
-            <input type="text" class="timepicker" placeholder="Horário da Retirada" name="hora_retirada">
-          </div>
-          <div class="input-field col s6">
-            <i class="material-icons prefix">av_timer</i>
-            <input type="text" class="timepicker" placeholder="Horário da Devolução" name="hora_retorno">
-          </div>
-          <div class="input-field col s6">
             <i class="material-icons prefix">perm_contact_calendar</i>
             <input type="text" class="datepicker" class=" darken-1 grey-text" placeholder="Data Retirada" name="data_retirada">
           </div>
@@ -155,7 +147,7 @@
     $('.datepicker').datepicker({
       format: 'dd/mm/yyyy',
       minDate: new Date(Date.now()),
-      maxDate: new Date().setMonth(Date.now()+2)
+      maxDate: new Date(Date.now()).setMonth(Date.now()+2)
     });
   });
   //Timepicker

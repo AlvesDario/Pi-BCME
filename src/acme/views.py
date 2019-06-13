@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Carro, Pessoa, Publicacao, Aluguel, Agendamento
 from django.contrib import messages
-from .forms import PessoaCreateForm, LoginForm, AgendamentoForm
+from .forms import PessoaCreateForm, LoginForm, AgendamentoForm, BuscaForm
 # import stripe
 
 # stripe.api_key = "pk_test_LSkKTymuMxmZ468ROAHkVpPT00b7FukC9b"
@@ -24,6 +24,9 @@ def checkout(request):
     context={
         'logedin': logedin(request),
     }
+    query = f"SELECT * FROM acme_publicacao WHERE publicacaoID='{request.GET['announce']}'"
+    context['announce'] = Publicacao.objects.raw(query)[0]
+    print(context['announce'])
     return render(request, 'acme/checkout.html', context)
 
 def index(request):
@@ -80,8 +83,11 @@ def signup(request):
     return render(request, 'acme/signup.html', context)
 
 def cars(request):
-    carros = Carro.objects.all()
-    return render(request, 'acme/carros.html', {'cars': carros})
+    context={
+        'logedin': logedin(request),
+    }
+    context['carros'] = Carro.objects.all()
+    return render(request, 'acme/carros.html', context)
 
 def account(request):
     if not logedin(request):
@@ -96,11 +102,23 @@ def offers(request):
     context={
         'logedin': logedin(request),
     }
-    if request.method == 'POST':
-        print(request.POST['modelo'])
     ofertas = Publicacao.objects.all()
+    if request.method == 'POST':
+        form = BuscaForm(request.POST)
+        print(form.is_valid())
+        if form.is_valid():
+            query = f"SELECT * FROM acme_publicacao WHERE preco>={form.cleaned_data.get('minpreco')} "
+            # if form.cleaned_data.get('modelo'):
+            #     query+=f"and carro IN (SELECT * FROM acme_carro WHERE modelo like '%{form.cleaned_data.get('modelo')}%')"
+            # if form.cleaned_data.get('marca'):
+            #     query+=f"and  IN (SELECT * FROM acme_carro WHERE modelo like '%{form.cleaned_data.get('modelo')}%')"
+                
+            ofertas = Publicacao.objects.raw(query)
     context['offers'] = ofertas
     return render(request, 'acme/offers.html', context)
 
 def about(request):
-    return render(request, 'acme/about.html')
+    context={
+        'logedin': logedin(request),
+    }
+    return render(request, 'acme/about.html', context)
