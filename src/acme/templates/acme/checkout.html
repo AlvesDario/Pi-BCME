@@ -14,7 +14,11 @@
           <h6>Você fez uma boa escolha!</h6>
           <h4>{{announce.carro.modelo}}</h4>
           <p>Ano: {{announce.carro.ano}}</p>
+          {% if announce.perkm %}
+          <p>Preço por km: R$ {{announce.preco}}</p><br>
+          {% else %}
           <p>Preço por dia: R$ {{announce.preco}}</p><br>
+          {% endif %}
           <form method="POST" class="col s12">
             {% csrf_token %}
             <p>Confirme a data, por favor</p>
