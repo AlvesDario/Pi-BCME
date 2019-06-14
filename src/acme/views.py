@@ -121,8 +121,7 @@ def account(request):
     context={
         'logedin': logedin(request),
     }
-    query = f"SELECT * FROM acme_pessoa WHERE nome='{request.session.get('username')}'"
-    Pessoa.objects.raw()
+    Pessoa.objects.get(nome=request.session.get('username'))
     return render(request, 'acme/account.html', context)
 
 def offers(request):
