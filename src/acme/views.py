@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Carro, Pessoa, Publicacao, Aluguel, Agendamento
 from django.contrib import messages
-from .forms import PessoaCreateForm, LoginForm, AgendamentoForm, BuscaForm
+from .forms import PessoaCreateForm, LoginForm, AgendamentoForm, BuscaForm, AluguelForm
 import datetime
 
 # stripe.api_key = "pk_test_LSkKTymuMxmZ468ROAHkVpPT00b7FukC9b"
@@ -30,6 +30,21 @@ def checkout(request):
     for aluguel in alugueis:
         r=[aluguel.data_retirada-datetime.timedelta(days=x) for x in range(0, (aluguel.data_retorno-aluguel.data_retirada).days)]
         datas+=r
+    if request.method=='POST':
+        form = AluguelForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data.get('data_retirada')>form.cleaned_data.get('data_retorno'):
+                messages.warning(request, "data de retirada precisa ser menor que a data de entrega")
+                return redirect('checkout')
+            # if 
+            Aluguel.objects.create(
+                valor = context['announce'].preco if context['announce'].perkm else context['announce'].preco*(1+(form.cleaned_data.get('data_retorno')-form.cleaned_data.get('data_retirada')).days),
+                publicacao = context['announce'],
+                pessoa = Pessoa.objects.get(nome = request.session.get('username')),
+                data_retirada = form.cleaned_data.get('data_retirada'),
+                data_retorno = form.cleaned_data.get('data_retorno'),
+            )
+            messages.success(request, "aluguel efetuado com sucesso")
     context['datas'] = datas
     return render(request, 'acme/checkout.html', context)
 
@@ -134,7 +149,6 @@ def offers(request):
         form = BuscaForm(request.POST)
         print(form.is_valid())
         if form.is_valid():
-            print(form.cleaned_data.get('perkm'))
             ofertas.filter(perkm=form.cleaned_data.get('perkm'))
             if form.cleaned_data.get('minpreco'):
                 ofertas = ofertas.filter(preco__gte=form.cleaned_data.get('minpreco'))

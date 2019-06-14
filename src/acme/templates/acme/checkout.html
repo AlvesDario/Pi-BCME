@@ -15,85 +15,92 @@
           <h4>{{announce.carro.modelo}}</h4>
           <p>Ano: {{announce.carro.ano}}</p>
           <p>Preço por dia: R$ {{announce.preco}}</p><br>
-          <form>
+          <form method="POST" class="col s12">
+            {% csrf_token %}
             <p>Confirme a data, por favor</p>
             <div class="row">
               <div class="input-field col s6">
                 <i class="material-icons prefix">perm_contact_calendar</i>
-                <input type="date" class="datepicker" class=" darken-1 grey-text" placeholder="Data Retirada">
+                <input type="text" class="datepicker" class=" darken-1 grey-text" placeholder="Data Retirada"
+                  name="data_retirada">
               </div>
               <div class="input-field col s6">
                 <i class="material-icons prefix">chrome_reader_mode</i>
-                <input type="date" class="datepicker" class=" darken-1 grey-text" placeholder="Data da Devolução">
+                <input type="text" class="datepicker" class=" darken-1 grey-text" placeholder="Data da Devolução"
+                  name="data_retorno">
               </div>
             </div>
+            <button class="btn waves-effect waves-light red" type="submit" style="float: left;">
+              <i class="material-icons right">add_shopping_cart</i>
+
+              <!-- <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="pk_test_LSkKTymuMxmZ468ROAHkVpPT00b7FukC9b" data-amount="44999" data-name="Pipeline Rent a Car"
+                  data-description="Aluguel do carro: Exemplo"
+                  data-image="https://stripe.com/img/documentation/checkout/marketplace.png" data-locale="auto"
+                  data-currency="brl">
+                  </script> -->
+            </button>
           </form>
         </div>
         <div class="card-action">
-          <button class="btn waves-effect waves-light red" style="float: left;">
-            <i class="material-icons right">add_shopping_cart</i>
 
-            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-              data-key="pk_test_LSkKTymuMxmZ468ROAHkVpPT00b7FukC9b" data-amount="44999" data-name="Pipeline Rent a Car"
-              data-description="Aluguel do carro: Exemplo"
-              data-image="https://stripe.com/img/documentation/checkout/marketplace.png" data-locale="auto"
-              data-currency="brl">
-              </script>
-          </button>
-        </div>
-        <div class="card-content">
-          <p>
-            -------Descricao------- <br>
-            Preco: {{announce.preco}} <br>
-            <br>
-            {{announce.descricao}} <br>
-            <br>
-            <br>
-            ---------Carro--------- <br>
-            Modelo: {{announce.carro.modelo}} <br>
-            Ano: {{announce.carro.ano}} <br>
-            <br>
-            {{announce.carro.descricao}} <br>
-            <br>
-            <br>
-            ---------Marca--------- <br>
-            Marca: {{announce.carro.marca.nome}} <br>
-            <br>
-            {{announce.carro.marca.descricao}} <br>
-            <br>
-            <br>
-            -------Categoria------- <br>
-            Tipo: {{announce.carro.categoria.nome}} <br>
-            <br>
-            {{announce.carro.categoria.descricao}} <br>
-            <br>
-          </p>
+
+          <div class="card-content">
+            <p>
+              -------Descricao------- <br>
+              Preco: {{announce.preco}} <br>
+              <br>
+              {{announce.descricao}} <br>
+              <br>
+              <br>
+              ---------Carro--------- <br>
+              Modelo: {{announce.carro.modelo}} <br>
+              Ano: {{announce.carro.ano}} <br>
+              <br>
+              {{announce.carro.descricao}} <br>
+              <br>
+              <br>
+              ---------Marca--------- <br>
+              Marca: {{announce.carro.marca.nome}} <br>
+              <br>
+              {{announce.carro.marca.descricao}} <br>
+              <br>
+              <br>
+              -------Categoria------- <br>
+              Tipo: {{announce.carro.categoria.nome}} <br>
+              <br>
+              {{announce.carro.categoria.descricao}} <br>
+              <br>
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
 <script>
   var disbaleDays = function (day) {
     // An array of dates.
-    var dates = [
-      new Date(day.getFullYear(), 04, 11).toDateString(),
-      new Date(day.getFullYear(), 04, 21).toDateString(),
-      new Date(day.getFullYear(), 04, 24).toDateString()
-    ];
-
-    // Check to see if this date is in our array.
-    if (dates.indexOf(day.toDateString()) >= 0) {
-      return true; // Disables date.
-    }
-    return false; // Date is availble.
-  }
-  //Datepicker
-  const Calender = document.querySelector('.datepicker');
-  M.Datepicker.init(Calender, {});
-  $(document).ready(function () {
-    $('.datepicker').datepicker({
-      format: 'dd/mm/yyyy'
+    var dates = [];
+    {% for dia in datas %}
+    dates.push(new Date({{ dia.year }}, {{ dia.month }}, { { dia.day } }).toDateString());
+  {% endfor %}
+  // Check to see if this date is in our array.
+  if (dates.indexOf(day.toDateString()) >= 0) {
+    return true; // Disables date.
+  };
+  return false; // Date is availble.
+  };
+  document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.datepicker');
+    // Initialize the date picker and provide a function to check dates.
+    var instances = M.Datepicker.init(elems, {
+      'format': 'dd/mm/yyyy',
+      // 'minDate': new Date().now(),
+      // 'disableWeekends': true,
+      'disableDayFn': disbaleDays
     });
   });
 </script>

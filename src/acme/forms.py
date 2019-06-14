@@ -26,3 +26,7 @@ class BuscaForm(forms.Form):
     minpreco = forms.FloatField()
     maxpreco = forms.FloatField(required=False)
     perkm = forms.BooleanField(required=False)
+
+class AluguelForm(forms.Form):
+    data_retirada = forms.DateField(input_formats=['%d/%m/%Y'])
+    data_retorno = forms.DateField(input_formats=['%d/%m/%Y'])
