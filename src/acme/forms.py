@@ -16,9 +16,7 @@ class PessoaCreateForm(forms.Form):
 
 class AgendamentoForm(forms.Form):
     data_retirada = forms.DateField(input_formats=['%d/%m/%Y'])
-    hora_retirada = forms.TimeField(input_formats=['%H:%M'])
     data_retorno = forms.DateField(input_formats=['%d/%m/%Y'])
-    hora_retorno = forms.TimeField(input_formats=['%H:%M'])
     cidade = forms.CharField(max_length=20)
     estado = forms.CharField(max_length=2)
 

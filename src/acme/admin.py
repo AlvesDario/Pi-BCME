@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Categoria, Marca, Carro, Pessoa, Publicacao, Aluguel
+from .models import Categoria, Marca, Carro, Pessoa, Publicacao, Aluguel, Agendamento
 from django.contrib.auth.models import User, Group
 
 admin.site.register(Categoria)
@@ -8,5 +8,6 @@ admin.site.register(Carro)
 admin.site.register(Pessoa)
 admin.site.register(Publicacao)
 admin.site.register(Aluguel)
+admin.site.register(Agendamento)
 admin.site.unregister(Group)
 admin.site.unregister(User)
