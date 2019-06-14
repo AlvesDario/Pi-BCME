@@ -30,13 +30,26 @@ def checkout(request):
     for aluguel in alugueis:
         r=[aluguel.data_retirada-datetime.timedelta(days=x) for x in range(0, (aluguel.data_retorno-aluguel.data_retirada).days)]
         datas+=r
+    print(datas)
     if request.method=='POST':
         form = AluguelForm(request.POST)
         if form.is_valid():
             if form.cleaned_data.get('data_retirada')>form.cleaned_data.get('data_retorno'):
                 messages.warning(request, "data de retirada precisa ser menor que a data de entrega")
-                return redirect('checkout')
-            # if 
+                return redirect('offers')
+            for data in datas:
+                if form.cleaned_data.get('data_retirada')<=data:
+                    messages.warning(request, "data indisponível")
+                    return redirect('offers')
+                if form.cleaned_data.get('data_retorno')>=data:
+                    messages.warning(request, "data indisponível")
+                    return redirect('offers')
+            if form.cleaned_data.get('data_retirada') in datas:
+                messages.warning(request, "data indisponível")
+                return redirect('offers')
+            if form.cleaned_data.get('data_retorno') in datas:
+                messages.warning(request, "data indisponível")
+                return redirect('offers')
             Aluguel.objects.create(
                 valor = context['announce'].preco if context['announce'].perkm else context['announce'].preco*(1+(form.cleaned_data.get('data_retorno')-form.cleaned_data.get('data_retirada')).days),
                 publicacao = context['announce'],

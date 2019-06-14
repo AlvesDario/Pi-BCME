@@ -85,13 +85,14 @@
     // An array of dates.
     var dates = [];
     {% for dia in datas %}
-    dates.push(new Date({{ dia.year }}, {{ dia.month }}, { { dia.day } }).toDateString());
-  {% endfor %}
-  // Check to see if this date is in our array.
-  if (dates.indexOf(day.toDateString()) >= 0) {
-    return true; // Disables date.
-  };
-  return false; // Date is availble.
+      dates.push(new Date({{ dia.year }}, {{ dia.month }}-1, {{ dia.day }}+1).toDateString());
+    {% endfor %}
+    console.log(dates)
+    // Check to see if this date is in our array.
+    if (dates.indexOf(day.toDateString()) >= 0) {
+      return true; // Disables date.
+    };
+    return false; // Date is availble.
   };
   document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.datepicker');
