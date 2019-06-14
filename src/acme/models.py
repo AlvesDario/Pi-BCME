@@ -44,7 +44,6 @@ class Publicacao(models.Model):
     publicacaoID = models.AutoField(primary_key = True)
     carro = models.ForeignKey('Carro', on_delete = models.CASCADE)
     preco = models.FloatField()
-    disponivel = models.IntegerField()
     descricao = models.CharField(max_length = 200)
     perkm = models.BooleanField()
     def __str__(self):
@@ -54,8 +53,8 @@ class Aluguel(models.Model):
     aluguelID = models.AutoField(primary_key = True)
     pessoa = models.ForeignKey('Pessoa', on_delete = models.CASCADE)
     publicacao = models.ForeignKey('Publicacao', on_delete = models.CASCADE)
-    data_retirada = models.DateTimeField()
-    data_retorno = models.DateTimeField()
+    data_retirada = models.DateField()
+    data_retorno = models.DateField()
     data_aluguel = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f'{self.pessoa.nome} <-> {self.publicacao.carro.modelo}'
@@ -63,9 +62,7 @@ class Aluguel(models.Model):
 class Agendamento(models.Model):
     pessoa = models.ForeignKey('Pessoa', on_delete= models.CASCADE)
     data_retirada = models.DateField()
-    hora_retirada = models.TimeField()
     data_retorno = models.DateField()
-    hora_retorno = models.TimeField()
     cidade = models.CharField(max_length=20)
     estado = models.CharField(max_length=2)
     def __str__(self):

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Carro, Pessoa, Publicacao, Aluguel, Agendamento
 from django.contrib import messages
 from .forms import PessoaCreateForm, LoginForm, AgendamentoForm, BuscaForm
-# import stripe
+import datetime
 
 # stripe.api_key = "pk_test_LSkKTymuMxmZ468ROAHkVpPT00b7FukC9b"
 # Create your views here.
@@ -24,9 +24,13 @@ def checkout(request):
     context={
         'logedin': logedin(request),
     }
-    query = f"SELECT * FROM acme_publicacao WHERE publicacaoID='{request.GET['announce']}'"
-    context['announce'] = Publicacao.objects.raw(query)[0]
-    print(context['announce'])
+    context['announce'] = Publicacao.objects.get(publicacaoID=request.GET['announce'])
+    alugueis = Aluguel.objects.filter(publicacao=Publicacao.objects.get(publicacaoID=request.GET['announce']))
+    datas=[]
+    for aluguel in alugueis:
+        r=[aluguel.data_retirada-datetime.timedelta(days=x) for x in range(0, (aluguel.data_retorno-aluguel.data_retirada).days)]
+        datas+=r
+    context['datas'] = datas
     return render(request, 'acme/checkout.html', context)
 
 def index(request):
