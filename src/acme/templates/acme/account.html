@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<!--Listagem dos carros com os preços (ainda apenas modelos)-->
+<div class="container">
+  <h3 class="light">Meus carros</h3>
+  <p>Olá, Lorem Lorem. Seus carros estão listados abaixo.</p>
+  <div class="row">
+    {% for aluguel in alugueis %}
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-image">
+          <img src="../../media/{{oferta.carro.imagem}}">
+        </div>
+        <div class="card-content">
+          <h4><a href="{% url 'checkout' %}?announce={{oferta.publicacaoID}}">{{oferta.carro.modelo}}</a></h4>
+          <p>{{oferta.descricao}}</p>
+          <p>Ano: {{oferta.carro.ano}}</p>
+          <p>Marca: {{oferta.carro.marca.nome}}</p>
+          {% if oferta.perkm %}
+          <p>Preço por km: R$ {{oferta.preco}}</p>
+          {% else %}
+          <p>Preço por dia: R$ {{oferta.preco}}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, options);
+  });
+</script>
+
+<script>
+  $(document).ready(function () {
+    $('.collapsible').collapsible();
+  });
+</script>
+
+<script>
+  //Slides
+  const slider = document.querySelector('.slider');
+  M.Slider.init(slider, {
+
+    height: 500,
+    transition: 500,
+    interval: 6000
+  });
+
+</script>
+{% endblock %}

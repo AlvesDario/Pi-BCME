@@ -31,13 +31,19 @@ def checkout(request):
 
 def index(request):
     if request.method == 'POST':
-        if logedin(request):
+        if not logedin(request):
             messages.warning(request, "faça o login")
             return redirect('login')
         form = AgendamentoForm(request.POST)
         print(form.is_valid())
         if form.is_valid():
-            print(form.cleaned_data.get('estado'))
+            Agendamento.objects.create(
+                pessoa = Pessoa.objects.get(nome=request.session['username']),
+                data_retirada = form.cleaned_data.get('data_retirada'),
+                data_retorno = form.cleaned_data.get('data_retorno'),
+                cidade = form.cleaned_data.get('cidade'),
+                estado = form.cleaned_data.get('estado'),
+            )
             messages.success(request, "Solicitação de agendamento feita com sucesso, entraremos em contato")
     context={
         'logedin': logedin(request),
@@ -83,6 +89,21 @@ def signup(request):
     return render(request, 'acme/signup.html', context)
 
 def cars(request):
+    if request.method == 'POST':
+        if not logedin(request):
+            messages.warning(request, "faça o login")
+            return redirect('login')
+        form = AgendamentoForm(request.POST)
+        print(form.is_valid())
+        if form.is_valid():
+            Agendamento.objects.create(
+                pessoa = Pessoa.objects.get(nome=request.session['username']),
+                data_retirada = form.cleaned_data.get('data_retirada'),
+                data_retorno = form.cleaned_data.get('data_retorno'),
+                cidade = form.cleaned_data.get('cidade'),
+                estado = form.cleaned_data.get('estado'),
+            )
+            messages.success(request, "Solicitação de agendamento feita com sucesso, entraremos em contato")
     context={
         'logedin': logedin(request),
     }
@@ -109,15 +130,16 @@ def offers(request):
         form = BuscaForm(request.POST)
         print(form.is_valid())
         if form.is_valid():
-            ofertas = ofertas.filter(preco__gte=form.cleaned_data.get('minpreco'))
+            print(form.cleaned_data.get('perkm'))
+            ofertas.filter(perkm=form.cleaned_data.get('perkm'))
+            if form.cleaned_data.get('minpreco'):
+                ofertas = ofertas.filter(preco__gte=form.cleaned_data.get('minpreco'))
+            if form.cleaned_data.get('maxpreco'):
+                ofertas = ofertas.filter(preco__lte=form.cleaned_data.get('maxpreco'))
             if form.cleaned_data.get('modelo'):
                 ofertas = ofertas.filter(carro__modelo__contains=form.cleaned_data.get('modelo'))
             if form.cleaned_data.get('marca'):
                 ofertas = ofertas.filter(carro__marca__nome__contains=form.cleaned_data.get('marca'))
-            if form.cleaned_data.get('maxpreco'):
-                ofertas = ofertas.filter(preco__lte=form.cleaned_data.get('maxpreco'))
-                
-            # ofertas = Publicacao.objects.raw(query)
     context['offers'] = ofertas
     return render(request, 'acme/offers.html', context)
 
