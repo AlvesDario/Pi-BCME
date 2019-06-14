@@ -53,6 +53,7 @@ class Aluguel(models.Model):
     aluguelID = models.AutoField(primary_key = True)
     pessoa = models.ForeignKey('Pessoa', on_delete = models.CASCADE)
     publicacao = models.ForeignKey('Publicacao', on_delete = models.CASCADE)
+    valor = models.FloatField()
     data_retirada = models.DateField()
     data_retorno = models.DateField()
     data_aluguel = models.DateTimeField(auto_now_add=True)

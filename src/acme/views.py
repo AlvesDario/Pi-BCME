@@ -121,7 +121,8 @@ def account(request):
     context={
         'logedin': logedin(request),
     }
-    Pessoa.objects.get(nome=request.session.get('username'))
+    context['user'] = Pessoa.objects.get(nome=request.session.get('username'))
+    context['alugueis'] = Aluguel.objects.filter(pessoa=context['user'])
     return render(request, 'acme/account.html', context)
 
 def offers(request):
