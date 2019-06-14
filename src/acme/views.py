@@ -139,7 +139,10 @@ def cars(request):
     context={
         'logedin': logedin(request),
     }
-    context['carros'] = Carro.objects.all()
+    # context['carros'] = Carro.objects.all()
+    context['economy'] = Carro.objects.filter(categoria__nome="Economico")
+    context['intermediary'] = Carro.objects.filter(categoria__nome="Intermediario")
+    context['executive'] = Carro.objects.filter(categoria__nome="Executivo")
     return render(request, 'acme/carros.html', context)
 
 def account(request):
